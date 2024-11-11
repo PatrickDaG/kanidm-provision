@@ -464,13 +464,13 @@ in
               };
 
               originUrl = lib.mkOption {
-                description = "The origin URL of the service. OAuth2 redirects will only be allowed to sites under this origin. Must end with a slash.";
+                description = "The origin URL of the service. OAuth2 redirects will only be allowed coming from sites matching this URI when strict url matching is enabled otherwise the whole origin will match.";
                 type =
                   let
-                    originStrType = lib.types.strMatching ".*://.*/$";
+                    originStrType = lib.types.strMatching ".*://.*$";
                   in
                   lib.types.either originStrType (lib.types.nonEmptyListOf originStrType);
-                example = "https://someservice.example.com/";
+                example = "https://someservice.example.com/auth/login";
               };
 
               originLanding = lib.mkOption {
@@ -509,6 +509,14 @@ in
                 '';
                 type = lib.types.bool;
                 default = false;
+              };
+
+              strictRedirectURI = lib.mkOption {
+                description = ''
+                  Enable strict redirect URI matching.
+                '';
+                type = lib.types.bool;
+                default = true;
               };
 
               preferShortUsername = lib.mkOption {

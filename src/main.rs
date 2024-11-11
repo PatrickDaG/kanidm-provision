@@ -216,12 +216,6 @@ fn sync_oauth2s(
                 existing_oauth2s.extend(kanidm_client.get_entities(ENDPOINT_OAUTH2)?);
             }
 
-            for origin_url in &origin_urls {
-                if !origin_url.ends_with('/') {
-                    println!("{}", format!("WARN: origin_url ({}) of oauth2 resource server '{name}' should end in a slash! This will lead to unnecessary updates.", origin_url).yellow().bold());
-                }
-            }
-
             if oauth2.public {
                 if oauth2.allow_insecure_client_disable_pkce {
                     println!(
@@ -237,6 +231,7 @@ fn sync_oauth2s(
                     "oauth2_allow_localhost_redirect": Some(oauth2.enable_localhost_redirects.to_string()),
                     "oauth2_jwt_legacy_crypto_enable": Some(oauth2.enable_legacy_crypto.to_string()),
                     "oauth2_prefer_short_username": Some(oauth2.prefer_short_username.to_string()),
+                    "oauth2_strict_redirect_uri": Some(oauth2.strict_redirect_uri.to_string()),
                 ]);
                 kanidm_client.update_oauth2_attrs(existing_oauth2s, name, "oauth2_rs_origin", origin_urls)?;
             } else {
@@ -254,6 +249,7 @@ fn sync_oauth2s(
                     "oauth2_allow_insecure_client_disable_pkce": Some(oauth2.allow_insecure_client_disable_pkce.to_string()),
                     "oauth2_jwt_legacy_crypto_enable": Some(oauth2.enable_legacy_crypto.to_string()),
                     "oauth2_prefer_short_username": Some(oauth2.prefer_short_username.to_string()),
+                    "oauth2_strict_redirect_uri": Some(oauth2.strict_redirect_uri.to_string()),
                 ]);
                 kanidm_client.update_oauth2_attrs(existing_oauth2s, name, "oauth2_rs_origin", origin_urls)?;
             }

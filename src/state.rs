@@ -72,6 +72,8 @@ pub struct Oauth2System {
     pub remove_orphaned_claim_maps: bool,
     #[serde(default)]
     pub claim_maps: HashMap<String, ClaimMap>,
+    #[serde(default = "default_true")]
+    pub strict_redirect_uri: bool,
 }
 
 #[derive(Debug, Deserialize)]

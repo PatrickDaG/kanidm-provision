@@ -32,7 +32,7 @@ PRs are of course welcome!
 | |
 | 🌐 | **Oauth2**
 | ✅ | Create/delete (basic, public)
-| ✅ | Attributes (origin url, origin landing, pkce enable, prefer short username)
+| ✅ | Attributes (origin url, origin landing, pkce enable, prefer short username, strict redirect uri)
 | ✅* | Basic secret
 | ✅ | Scope maps
 | ✅ | Supplementary scope maps
